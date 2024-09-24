@@ -18,3 +18,21 @@ class Car(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class CommentCar(models.Model):
+    RATING = (
+        ("*", "*"),
+        ("**", "**"),
+        ("***", "***"),
+        ("****", "****"),
+        ("*****", "*****"),
+    )
+
+    car_choice_comment = models.ForeignKey(Car, on_delete=models.CASCADE, related_name="comments")
+    text = models.TextField()
+    rate_starts = models.CharField(max_length=100, choices=RATING)
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.rate_starts

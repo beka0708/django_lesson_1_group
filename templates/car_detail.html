@@ -109,6 +109,10 @@
 </head>
 <body>
 {% include 'header.html' %}
+<a href="/car_list/{{car_detail.id}}/update/"><button type="submit">Обновить машину</button></a>
+<a href="/car_list/{{car_detail.id}}/delete/"><button type="submit">Удалить машину</button></a>
+<a href="/car_list/{{car_detail.id}}/comment/"><button type="submit">Добавить комментарий</button></a>
+
 <div class="container">
     <div class="content">
         <h1>{{car_detail.title}}</h1>
@@ -118,19 +122,25 @@
         <br>
         <i>{{car_detail.price}}$</i>
         <h6>{{car_detail.car_type}}</h6>
-        <table>
+        <table border="4px">
             <tr>
-                <th>Характеристика</th>
-                <th>Значение</th>
+                <tb>Текст</tb> &nbsp;
+                <tb>Рейтинг</tb> &nbsp;
+                <tb>Дата создания</tb> &nbsp;
             </tr>
-            {% for characteristic, value in car_detail.characteristics.items %}
+            {% for j in car_detail.comments.all %}
             <tr>
-                <td>{{characteristic}}</td>
-                <td>{{value}}</td>
+                <td>{{j.text}}</td>
+                <td>{{j.rate_starts}}</td>
+                <td>{{j.created_date}}</td>
             </tr>
             {% endfor %}
         </table>
-        <iframe src="{{car_detail.video}}" frameborder="0"></iframe>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{form.as_p}}
+        </form>
+<!--        <iframe src="{{car_detail.video}}" frameborder="0"></iframe>-->
     </div>
 </div>
 {% comment %}
