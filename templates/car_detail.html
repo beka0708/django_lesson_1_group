@@ -109,26 +109,26 @@
 </head>
 <body>
 {% include 'header.html' %}
-<a href="/car_list/{{car_detail.id}}/update/"><button type="submit">Обновить машину</button></a>
-<a href="/car_list/{{car_detail.id}}/delete/"><button type="submit">Удалить машину</button></a>
-<a href="/car_list/{{car_detail.id}}/comment/"><button type="submit">Добавить комментарий</button></a>
+<a href="/car_list/{{object.id}}/update/"><button type="submit">Обновить машину</button></a>
+<a href="/car_list/{{object.id}}/delete/"><button type="submit">Удалить машину</button></a>
+<a href="/car_list/{{object.id}}/comment/"><button type="submit">Добавить комментарий</button></a>
 
 <div class="container">
     <div class="content">
-        <h1>{{car_detail.title}}</h1>
-        <p>{{car_detail.description}}</p>
-        <p>{{car_detail.created_date}}</p>
-        <img src="{{car_detail.image.url}}" alt="">
+        <h1>{{object.title}}</h1>
+        <p>{{object.description}}</p>
+        <p>{{object.created_date}}</p>
+        <img src="{{object.image.url}}" alt="">
         <br>
-        <i>{{car_detail.price}}$</i>
-        <h6>{{car_detail.car_type}}</h6>
+        <i>{{object.price}}$</i>
+        <h6>{{object.car_type}}</h6>
         <table border="4px">
             <tr>
                 <tb>Текст</tb> &nbsp;
                 <tb>Рейтинг</tb> &nbsp;
                 <tb>Дата создания</tb> &nbsp;
             </tr>
-            {% for j in car_detail.comments.all %}
+            {% for j in object.comments.all %}
             <tr>
                 <td>{{j.text}}</td>
                 <td>{{j.rate_starts}}</td>
@@ -140,7 +140,7 @@
           {% csrf_token %}
           {{form.as_p}}
         </form>
-<!--        <iframe src="{{car_detail.video}}" frameborder="0"></iframe>-->
+        <iframe src="{{object.video}}" frameborder="0"></iframe>
     </div>
 </div>
 {% comment %}
